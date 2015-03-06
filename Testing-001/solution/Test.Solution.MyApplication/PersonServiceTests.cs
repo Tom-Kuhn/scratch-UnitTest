@@ -15,9 +15,7 @@ namespace Test.Solution.MyApplication
         public Mock<IValidation> ValidationMock;
 
         public PersonService _target;
-
-        public Person TestPerson;
-
+        
         [SetUp]
         public void __init()
         {
@@ -31,13 +29,6 @@ namespace Test.Solution.MyApplication
 
             // Create the test target
             _target = new PersonService(ValidationMock.Object);
-
-            var values = new Dictionary<string, dynamic>();
-            values["Name"] = "Tom";
-            values["Occupation"] = "Engineer";
-            values["DOB"] = new DateTime(1984, 10, 3);
-
-            TestPerson = new Person(values);
         }
 
         [Test]
@@ -47,23 +38,57 @@ namespace Test.Solution.MyApplication
             // Create mock that states that the customer is invalid
             ValidationMock.Setup(x => x.IsValid(It.IsAny<Person>())).Returns(false);
 
-            _target.GetAgeGroup(TestPerson);
+            _target.GetAgeGroup(new Person());
         }
 
         [Test]
-        public void Solution_GetAgeGroup_ValidPerson_NoExceptionThrown()
+        public void Solution_GetAgeGroup_ValidScenarios_TestManager()
         {
-            _target.GetAgeGroup(TestPerson);
+            Solution_GetAgeGroup_TestRunner(0, AgeGroup.Child);
+            Solution_GetAgeGroup_TestRunner(1, AgeGroup.Child);
+            Solution_GetAgeGroup_TestRunner(5, AgeGroup.Child);
+            Solution_GetAgeGroup_TestRunner(12, AgeGroup.Child);
 
-            Assert.Pass();
+            Solution_GetAgeGroup_TestRunner(13, AgeGroup.Teen);
+            Solution_GetAgeGroup_TestRunner(15, AgeGroup.Teen);
+            Solution_GetAgeGroup_TestRunner(17, AgeGroup.Teen);
+
+            Solution_GetAgeGroup_TestRunner(18, AgeGroup.YoungAdult);
+            Solution_GetAgeGroup_TestRunner(21, AgeGroup.YoungAdult);
+            Solution_GetAgeGroup_TestRunner(25, AgeGroup.YoungAdult);
+
+            Solution_GetAgeGroup_TestRunner(26, AgeGroup.Adult);
+            Solution_GetAgeGroup_TestRunner(28, AgeGroup.Adult);
+            Solution_GetAgeGroup_TestRunner(74, AgeGroup.Adult);
+
+            Solution_GetAgeGroup_TestRunner(75, AgeGroup.Retired);
+            Solution_GetAgeGroup_TestRunner(100, AgeGroup.Retired);
+            Solution_GetAgeGroup_TestRunner(200, AgeGroup.Retired);
+        }
+        
+        public void Solution_GetAgeGroup_TestRunner(int age, AgeGroup expectedResult)
+        {
+            // Arrange
+            var testPerson = new Person() { DOB = DateTime.Today.AddYears(-age) };
+
+            // Act
+            var result = _target.GetAgeGroup(testPerson);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result, string.Format("Check that age: {0} correctly falls into the category {1}", age, expectedResult.ToString()));
         }
 
         [Test]
-        public void Solution_GetAgeGroup_ChildCustomer_CorrectAgeGroupReturned()
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(35)]
+        [TestCase(99)]
+        public void Solution_CalculateAge_ValidDates_AgeReturned(int age)
         {
-            _target.GetAgeGroup(TestPerson);
+            var result = _target.CalculateAge(DateTime.Today.AddYears(-age));
 
-            Assert.Pass();
+            Assert.AreEqual(age, result);
         }
+
     }
 }
