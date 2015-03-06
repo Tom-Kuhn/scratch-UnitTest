@@ -1,21 +1,14 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using NUnit.Framework;
 using Solution.MyApplication;
 using Solution.MyApplication.Validation;
-using System;
-using System.Collections.Generic;
 
 namespace Test.Solution.MyApplication
 {
     [TestFixture]
     public class PersonServiceTests
     {
-        public MockRepository Mocks;
-
-        public Mock<IValidation> ValidationMock;
-
-        public PersonService _target;
-        
         [SetUp]
         public void __init()
         {
@@ -31,14 +24,54 @@ namespace Test.Solution.MyApplication
             _target = new PersonService(ValidationMock.Object);
         }
 
+        public MockRepository Mocks;
+
+        public Mock<IValidation> ValidationMock;
+
+        public PersonService _target;
+
+        public void Solution_GetAgeGroup_TestRunner(int age, AgeGroup expectedResult)
+        {
+            // Arrange
+            var testPerson = new Person() {DOB = DateTime.Today.AddYears(-age)};
+
+            // Act
+            AgeGroup result = _target.GetAgeGroup(testPerson);
+
+            // Assert
+            Assert.AreEqual(expectedResult, result,
+                string.Format("Check that age: {0} correctly falls into the category {1}", age,
+                    expectedResult.ToString()));
+        }
+
         [Test]
-        [ExpectedException(typeof(ApplicationException))]
+        [TestCase(0)]
+        [TestCase(1)]
+        [TestCase(35)]
+        [TestCase(99)]
+        public void Solution_CalculateAge_ValidDates_AgeReturned(int age)
+        {
+            int result = _target.CalculateAge(DateTime.Today.AddYears(-age));
+
+            Assert.AreEqual(age, result);
+        }
+
+        [Test]
+        [ExpectedException(typeof (ApplicationException))]
         public void Solution_GetAgeGroup_InvalidPerson_ApplicationExceptionThrown()
         {
             // Create mock that states that the customer is invalid
             ValidationMock.Setup(x => x.IsValid(It.IsAny<Person>())).Returns(false);
 
             _target.GetAgeGroup(new Person());
+        }
+
+        [Test]
+        public void Solution_GetAgeGroup_PersonIsValidated_ValidateIsCalled()
+        {
+            _target.GetAgeGroup(new Person() {DOB = new DateTime(1980, 1, 1)});
+
+            ValidationMock.VerifyAll();
         }
 
         [Test]
@@ -65,30 +98,5 @@ namespace Test.Solution.MyApplication
             Solution_GetAgeGroup_TestRunner(100, AgeGroup.Retired);
             Solution_GetAgeGroup_TestRunner(200, AgeGroup.Retired);
         }
-        
-        public void Solution_GetAgeGroup_TestRunner(int age, AgeGroup expectedResult)
-        {
-            // Arrange
-            var testPerson = new Person() { DOB = DateTime.Today.AddYears(-age) };
-
-            // Act
-            var result = _target.GetAgeGroup(testPerson);
-
-            // Assert
-            Assert.AreEqual(expectedResult, result, string.Format("Check that age: {0} correctly falls into the category {1}", age, expectedResult.ToString()));
-        }
-
-        [Test]
-        [TestCase(0)]
-        [TestCase(1)]
-        [TestCase(35)]
-        [TestCase(99)]
-        public void Solution_CalculateAge_ValidDates_AgeReturned(int age)
-        {
-            var result = _target.CalculateAge(DateTime.Today.AddYears(-age));
-
-            Assert.AreEqual(age, result);
-        }
-
     }
 }
