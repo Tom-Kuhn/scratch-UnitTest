@@ -7,6 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyApplication", "MyApplicat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.MyApplication", "Test.MyApplication\Test.MyApplication.csproj", "{D25864BA-F810-4208-B160-51C0437D6840}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{A27A7EB9-43BA-4EF0-8A44-9CF738795DF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Solution.MyApplication", "solution\Test.Solution.MyApplication\Test.Solution.MyApplication.csproj", "{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution.MyApplication", "..\solution\Testing-001\Solution.MyApplication\Solution.MyApplication.csproj", "{430051EE-3C0F-44D4-B95D-A492C938EB34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BE3DD200-5906-4CC5-A75B-05FCA8B4D4BD}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +34,20 @@ Global
 		{D25864BA-F810-4208-B160-51C0437D6840}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D25864BA-F810-4208-B160-51C0437D6840}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D25864BA-F810-4208-B160-51C0437D6840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{430051EE-3C0F-44D4-B95D-A492C938EB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{430051EE-3C0F-44D4-B95D-A492C938EB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{430051EE-3C0F-44D4-B95D-A492C938EB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{430051EE-3C0F-44D4-B95D-A492C938EB34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1} = {A27A7EB9-43BA-4EF0-8A44-9CF738795DF0}
+		{430051EE-3C0F-44D4-B95D-A492C938EB34} = {A27A7EB9-43BA-4EF0-8A44-9CF738795DF0}
 	EndGlobalSection
 EndGlobal
