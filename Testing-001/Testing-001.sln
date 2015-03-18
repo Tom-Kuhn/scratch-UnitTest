@@ -11,14 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{A2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.Solution.MyApplication", "solution\Test.Solution.MyApplication\Test.Solution.MyApplication.csproj", "{BC4FC63F-BF9F-40F5-A613-1D0E82DAAAC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution.MyApplication", "..\solution\Testing-001\Solution.MyApplication\Solution.MyApplication.csproj", "{430051EE-3C0F-44D4-B95D-A492C938EB34}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BE3DD200-5906-4CC5-A75B-05FCA8B4D4BD}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solution.MyApplication", "solution\Solution.MyApplication\Solution.MyApplication.csproj", "{430051EE-3C0F-44D4-B95D-A492C938EB34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -82,7 +82,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\solution\Testing-001\Solution.MyApplication\Solution.MyApplication.csproj">
+    <ProjectReference Include="..\Solution.MyApplication\Solution.MyApplication.csproj">
       <Project>{430051ee-3c0f-44d4-b95d-a492c938eb34}</Project>
       <Name>Solution.MyApplication</Name>
     </ProjectReference>
