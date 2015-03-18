@@ -7,13 +7,22 @@ using System.Threading.Tasks;
 
 namespace Solution.MyApplication.Validation
 {
-    public interface IValidation
-    {
-        bool IsValid(dynamic target);
-    }
-
+    /// <summary>
+    /// This class only validates People
+    /// </summary>
+    /// <remarks>
+    /// If there were multiple ways of validating the Person, you could overload the IsValid 
+    /// function with functions that take in a validation context. Normally you would look to 
+    /// use a different model for each layer of the application, therefore allowing you to 
+    /// specify one isValid method per object type that needs validating.
+    /// </remarks>
     public class PersonValidation : IValidation
     {
+        /// <summary>
+        /// Determines whether the specified target is valid.
+        /// </summary>
+        /// <param name="target">The target to Validate.</param>
+        /// <returns><c>true</c> if the target is valid; otherwise <c>false</c></returns>
         public bool IsValid(dynamic target)
         {
             // Simulate some complex processing!

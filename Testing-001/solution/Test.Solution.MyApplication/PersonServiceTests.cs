@@ -33,7 +33,7 @@ namespace Test.Solution.MyApplication
         public void Solution_GetAgeGroup_TestRunner(int age, AgeGroup expectedResult)
         {
             // Arrange
-            var testPerson = new Person() {DOB = DateTime.Today.AddYears(-age)};
+            var testPerson = new Person() {Dob = DateTime.Today.AddYears(-age)};
 
             // Act
             AgeGroup result = _target.GetAgeGroup(testPerson);
@@ -69,7 +69,7 @@ namespace Test.Solution.MyApplication
         [Test]
         public void Solution_GetAgeGroup_PersonIsValidated_ValidateIsCalled()
         {
-            _target.GetAgeGroup(new Person() {DOB = new DateTime(1980, 1, 1)});
+            _target.GetAgeGroup(new Person() {Dob = new DateTime(1980, 1, 1)});
 
             ValidationMock.VerifyAll();
         }

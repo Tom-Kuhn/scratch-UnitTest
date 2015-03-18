@@ -7,14 +7,20 @@ namespace Solution.MyApplication
 {
     public class PersonService
     {
-        public IValidation Validator { get; set; }
+        /// <summary>
+        /// Gets or sets the person validator.
+        /// </summary>
+        /// <value>
+        /// The person validator.
+        /// </value>
+        public IValidation PersonValidator { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
         /// </summary>
-        public PersonService(IValidation validator)
+        public PersonService(IValidation personValidator)
         {
-            Validator = validator;
+            PersonValidator = personValidator;
 
             // Ideally this would be a DB call
             AgeGroupMap = new Dictionary<int,AgeGroup>();
@@ -47,16 +53,16 @@ namespace Solution.MyApplication
         /// <exception cref="System.ApplicationException">If the customer is invalid</exception>
         public AgeGroup GetAgeGroup(Person customer)
         {
-            if (!Validator.IsValid(customer))
+            if (!PersonValidator.IsValid(customer))
             {
                 throw new ApplicationException("customer is invalid");
             }
 
             // Calculate age
-            int age = CalculateAge(customer.DOB);
+            int age = CalculateAge(customer.Dob);
 
             // Return the correct age group
-            var viableBuckets = AgeGroupMap.Where(x => x.Key >= age).ToList();
+            var viableBuckets = AgeGroupMap.Where(x => x.Key >= age);
             return AgeGroupMap[viableBuckets.Min(x => x.Key)];
         }
 
@@ -67,6 +73,7 @@ namespace Solution.MyApplication
         /// <returns>The age (in whole years)</returns>
         public int CalculateAge(DateTime dateOfBirth)
         {
+            // NB: should really be in a utility class, but it's here for the purpose of the workshop!
             DateTime zeroTime = new DateTime(1, 1, 1);
             int age = (zeroTime + (DateTime.Today - dateOfBirth)).Year - 1;
 

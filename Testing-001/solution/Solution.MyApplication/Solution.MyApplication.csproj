@@ -40,10 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgeGroup.cs" />
+    <Compile Include="Mapping\IPersonMapping.cs" />
     <Compile Include="Mapping\PersonMapping.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PersonService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\IValidation.cs" />
     <Compile Include="Validation\PersonValidation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
