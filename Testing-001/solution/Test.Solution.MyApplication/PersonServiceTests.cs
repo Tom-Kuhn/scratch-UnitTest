@@ -30,7 +30,28 @@ namespace Test.Solution.MyApplication
 
         public PersonService _target;
 
-        public void Solution_GetAgeGroup_TestRunner(int age, AgeGroup expectedResult)
+        [Test]
+        [TestCase(0, AgeGroup.Child)]
+        [TestCase(1, AgeGroup.Child)]
+        [TestCase(5, AgeGroup.Child)]
+        [TestCase(12, AgeGroup.Child)]
+
+        [TestCase(13, AgeGroup.Teen)]
+        [TestCase(15, AgeGroup.Teen)]
+        [TestCase(17, AgeGroup.Teen)]
+
+        [TestCase(18, AgeGroup.YoungAdult)]
+        [TestCase(21, AgeGroup.YoungAdult)]
+        [TestCase(25, AgeGroup.YoungAdult)]
+
+        [TestCase(26, AgeGroup.Adult)]
+        [TestCase(28, AgeGroup.Adult)]
+        [TestCase(74, AgeGroup.Adult)]
+
+        [TestCase(75, AgeGroup.Retired)]
+        [TestCase(100, AgeGroup.Retired)]
+        [TestCase(200, AgeGroup.Retired)]
+        public void Solution_GetAgeGroup_ValidScenarios_CorrectResultReturned(int age, AgeGroup expectedResult)
         {
             // Arrange
             var testPerson = new Person() {Dob = DateTime.Today.AddYears(-age)};
@@ -142,31 +163,6 @@ namespace Test.Solution.MyApplication
             _target.GetAgeGroup(new Person() {Dob = new DateTime(1980, 1, 1)});
 
             ValidationMock.VerifyAll();
-        }
-
-        [Test]
-        public void Solution_GetAgeGroup_ValidScenarios_TestManager()
-        {
-            Solution_GetAgeGroup_TestRunner(0, AgeGroup.Child);
-            Solution_GetAgeGroup_TestRunner(1, AgeGroup.Child);
-            Solution_GetAgeGroup_TestRunner(5, AgeGroup.Child);
-            Solution_GetAgeGroup_TestRunner(12, AgeGroup.Child);
-
-            Solution_GetAgeGroup_TestRunner(13, AgeGroup.Teen);
-            Solution_GetAgeGroup_TestRunner(15, AgeGroup.Teen);
-            Solution_GetAgeGroup_TestRunner(17, AgeGroup.Teen);
-
-            Solution_GetAgeGroup_TestRunner(18, AgeGroup.YoungAdult);
-            Solution_GetAgeGroup_TestRunner(21, AgeGroup.YoungAdult);
-            Solution_GetAgeGroup_TestRunner(25, AgeGroup.YoungAdult);
-
-            Solution_GetAgeGroup_TestRunner(26, AgeGroup.Adult);
-            Solution_GetAgeGroup_TestRunner(28, AgeGroup.Adult);
-            Solution_GetAgeGroup_TestRunner(74, AgeGroup.Adult);
-
-            Solution_GetAgeGroup_TestRunner(75, AgeGroup.Retired);
-            Solution_GetAgeGroup_TestRunner(100, AgeGroup.Retired);
-            Solution_GetAgeGroup_TestRunner(200, AgeGroup.Retired);
         }
     }
 }
