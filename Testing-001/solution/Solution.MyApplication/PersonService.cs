@@ -15,6 +15,9 @@ namespace Solution.MyApplication
         /// </value>
         public IValidation PersonValidator { get; set; }
 
+        /// <summary>
+        /// Function toget todays date.
+        /// </summary>
         public Func<DateTime> GetTodaysDate { get; set; }
 
         /// <summary>

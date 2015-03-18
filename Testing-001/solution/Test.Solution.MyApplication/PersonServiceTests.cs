@@ -90,6 +90,42 @@ namespace Test.Solution.MyApplication
             Assert.AreEqual(expectedAge, result);
         }
 
+        /*
+         * Test doesn't work due to leap year considerations
+         * TODO: Fix the test + code in the Workshop as a live exercise
+         */
+        ////[Test]
+        ////public void Solution_CalculateAge_BirthdayOnLeapYearFeb29DateFeb28_CorrectAgeReturned()
+        ////{
+        ////    DateTime currentTestSystemDate = new DateTime(2015, 2, 28);
+
+        ////    // Birthday on Feb 29th of leap year
+        ////    DateTime testDateOfBirth = new DateTime(2000, 2, 29);
+
+        ////    // Use a static date
+        ////    _target.GetTodaysDate = () => currentTestSystemDate;
+
+        ////    int result = _target.CalculateAge(testDateOfBirth);
+
+        ////    Assert.AreEqual(14, result);
+        ////}
+
+        [Test]
+        public void Solution_CalculateAge_BirthdayOnLeapYearAndDateFeb29_CorrectAgeReturned()
+        {
+            DateTime currentTestSystemDate = new DateTime(2020, 2, 29);
+
+            // Birthday on Feb 29th of leap year
+            DateTime testDateOfBirth = new DateTime(2000, 2, 29);
+
+            // Use a static date
+            _target.GetTodaysDate = () => currentTestSystemDate;
+
+            int result = _target.CalculateAge(testDateOfBirth);
+
+            Assert.AreEqual(20, result);
+        }
+
         [Test]
         [ExpectedException(typeof (ApplicationException))]
         public void Solution_GetAgeGroup_InvalidPerson_ApplicationExceptionThrown()
