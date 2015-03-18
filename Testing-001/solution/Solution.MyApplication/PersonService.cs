@@ -15,12 +15,20 @@ namespace Solution.MyApplication
         /// </value>
         public IValidation PersonValidator { get; set; }
 
+        public Func<DateTime> GetTodaysDate { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="PersonService"/> class.
         /// </summary>
-        public PersonService(IValidation personValidator)
+        /// <param name="personValidator">The person validator.</param>
+        /// <param name="retrieveCurrentDate">
+        /// Returns the current date. NB: Not supported by Unity, but can be done with Castle. 
+        /// This functionality could be contained within a DateManager class (or use Noda time!)
+        /// </param>
+        public PersonService(IValidation personValidator, Func<DateTime> retrieveCurrentDate )
         {
             PersonValidator = personValidator;
+            GetTodaysDate = retrieveCurrentDate;
 
             // Ideally this would be a DB call
             AgeGroupMap = new Dictionary<int,AgeGroup>();
@@ -75,7 +83,7 @@ namespace Solution.MyApplication
         {
             // NB: should really be in a utility class, but it's here for the purpose of the workshop!
             DateTime zeroTime = new DateTime(1, 1, 1);
-            int age = (zeroTime + (DateTime.Today - dateOfBirth)).Year - 1;
+            int age = (zeroTime + (GetTodaysDate().Date - dateOfBirth)).Year - 1;
 
             return age;
         }
