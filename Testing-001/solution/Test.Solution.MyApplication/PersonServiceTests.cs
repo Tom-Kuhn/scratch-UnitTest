@@ -21,7 +21,7 @@ namespace Test.Solution.MyApplication
             ValidationMock.Setup(x => x.IsValid(It.IsAny<Person>())).Returns(true);
 
             // Create the test target
-            _target = new PersonService(ValidationMock.Object);
+            _target = new PersonService(ValidationMock.Object, () => DateTime.Today);
         }
 
         public MockRepository Mocks;
@@ -54,6 +54,40 @@ namespace Test.Solution.MyApplication
             int result = _target.CalculateAge(DateTime.Today.AddYears(-age));
 
             Assert.AreEqual(age, result);
+        }
+
+        [Test]
+        public void Solution_CalculateAge_DayBeforeBirthday_CorrectAgeReturned()
+        {
+            int expectedAge = 15;
+            DateTime currentTestSystemDate = new DateTime(2015, 10, 3);
+
+            // Calculate the day before the 16th birthday (i.e. the birthday is one day after the sys date)
+            DateTime testDateOfBirth = currentTestSystemDate.AddYears(-(expectedAge) - 1).AddDays(1);
+
+            // Use a static date
+            _target.GetTodaysDate = () => currentTestSystemDate;
+
+            int result = _target.CalculateAge(testDateOfBirth);
+
+            Assert.AreEqual(expectedAge, result);
+        }
+
+        [Test]
+        public void Solution_CalculateAge_DayOfBirthday_CorrectAgeReturned()
+        {
+            int expectedAge = 15;
+            DateTime currentTestSystemDate = new DateTime(2015, 10, 3);
+
+            // Calculate the day of the 15th birthday
+            DateTime testDateOfBirth = currentTestSystemDate.AddYears(-(expectedAge));
+
+            // Use a static date
+            _target.GetTodaysDate = () => currentTestSystemDate;
+
+            int result = _target.CalculateAge(testDateOfBirth);
+
+            Assert.AreEqual(expectedAge, result);
         }
 
         [Test]
