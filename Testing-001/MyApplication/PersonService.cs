@@ -39,9 +39,10 @@ namespace MyApplication
             // Calculate age
             DateTime zeroTime = new DateTime(1, 1, 1);
             int age = (zeroTime + (DateTime.Today - customer.DOB)).Year;
-
+            
             // Return the correct age group
-            return AgeGroupMap.OrderBy(x => x.Key).First(x => x.Key < age).Value;
+            var viableBuckets = AgeGroupMap.Where(x => x.Key >= age);
+            return AgeGroupMap[viableBuckets.Min(x => x.Key)];
         }
     }
 }
