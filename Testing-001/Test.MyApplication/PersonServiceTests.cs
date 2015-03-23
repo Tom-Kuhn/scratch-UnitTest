@@ -1,12 +1,12 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Test.MyApplication
 {
-    [TestClass]
+    [TestFixture]
     public class PersonServiceTests
     {
-        [TestMethod]
+        [Test]
         public void GetAgeGroup_InvalidPerson_ApplicationExceptionThrown()
         {
             // TODO: implement test
