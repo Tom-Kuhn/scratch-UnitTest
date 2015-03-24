@@ -14,10 +14,10 @@ namespace MyApplication
         {
             AgeGroupMap = new Dictionary<int,AgeGroup>();
 
-            AgeGroupMap[14] = AgeGroup.Child;
+            AgeGroupMap[12] = AgeGroup.Child;
             AgeGroupMap[18] = AgeGroup.Teen;
             AgeGroupMap[25] = AgeGroup.YoungAdult;
-            AgeGroupMap[75] = AgeGroup.Adult;
+            AgeGroupMap[74] = AgeGroup.Adult;
             AgeGroupMap[999] = AgeGroup.Retired;
         }
 
