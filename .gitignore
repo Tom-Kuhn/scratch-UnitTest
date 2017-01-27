@@ -181,3 +181,10 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+
+
+*/.idea
+*.iml
+*/node_modules
+*/.grunt
+*/target
