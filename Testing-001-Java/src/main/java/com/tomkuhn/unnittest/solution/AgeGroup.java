@@ -1,4 +1,4 @@
-package com.tomkuhn.unnittest;
+package com.tomkuhn.unnittest.solution;
 
 /*
  * Enum describing Age-Group brackets

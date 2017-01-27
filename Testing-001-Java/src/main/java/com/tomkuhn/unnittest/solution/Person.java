@@ -1,4 +1,4 @@
-package com.tomkuhn.unnittest;
+package com.tomkuhn.unnittest.solution;
 
 import java.time.LocalDate;
 
@@ -36,27 +36,5 @@ public class Person {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public boolean isValid()
-    {
-        try {
-            // Simulate some complex processing!
-            Thread.sleep(400);
-        } catch (InterruptedException e) {
-            // Do nothing!
-        }
-
-        // Check that the name needs to contain an even number of letters
-        boolean result = (name.length() & 1) == 0;
-
-        // Check that the occupation length is a multiple of 3
-        result &= (occupation.length() & 3) == 0;
-
-        // Business rules around dob being tied to the name and occupation
-        result &= dob.getDayOfMonth() == (name.length());
-        result &= dob.getMonthValue() == (occupation.length());
-
-        return result;
     }
 }

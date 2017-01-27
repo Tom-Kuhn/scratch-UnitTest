@@ -1,9 +1,9 @@
-package com.tomkuhn.unnittest;
+package com.tomkuhn.unnittest.workshop;
 
+import com.tomkuhn.unnittest.workshop.PersonService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 /*******************************************************************************************************
